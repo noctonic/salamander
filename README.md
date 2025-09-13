@@ -82,4 +82,4 @@ then browse to
 ```
 http://localhost:8000
 ```
-
+If you are on windows and don't have python you can [use this powershell script](https://gist.github.com/noctonic/0cadb91a2c127ecf3ef93c11a813dd5d)

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Salamander Chat</title>
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <div id="chat">
+    <div id="topicBar">
+      <span class="chan">#salamander</span>
+      <span class="sep">—</span>
+      topic: "video killed the radio star"
+    </div>
+
+    <div id="messages"></div>
+
+    <div id="byteIndicator" aria-live="polite">0 / 170 bytes</div>
+
+    <div id="inputBar">
+      <input id="input" type="text" placeholder="Type message — press Enter to send" />
+      <button id="send">Send</button>
+      <button id="settingsBtn" title="Settings">⚙️</button>
+    </div>
+
+    <div id="settingsPanel" class="hidden">
+      <div><label>Call Sign: <input id="callsign" type="text"></label></div>
+      <div><label>Carrier Frequency: <input id="carrierFrequency" type="number" value="1500"></label></div>
+      <div><label>Noise Symbols: <input id="noiseSymbols" type="number" value="0"></label></div>
+      <div><label><input type="checkbox" id="fancyHeader"> Fancy header</label></div>
+
+      <div>
+        <label>Sample Rate:
+          <select id="sampleRate">
+            <option value="8000">8000</option>
+            <option value="16000">16000</option>
+            <option value="32000">32000</option>
+            <option value="44100">44100</option>
+            <option value="48000" selected>48000</option>
+          </select>
+        </label>
+      </div>
+
+      <div>
+        <label>Channel:
+          <select id="channel">
+            <option value="0" selected>0 (mono)</option>
+            <option value="1">1 (left)</option>
+            <option value="2">2 (right)</option>
+            <option value="4">4 (I/Q)</option>
+          </select>
+        </label>
+      </div>
+
+      <div><label><input type="checkbox" id="muteDuringTx" checked> Mute during transmission</label></div>
+
+      <div class="dangerZone">
+        <label class="dangerToggle">
+          <input type="checkbox" id="dangerZone" aria-controls="dangerZoneFields" aria-expanded="false"> Danger zone
+        </label>
+
+        <div id="dangerZoneFields" class="hidden">
+
+    <div>
+      <label><br>Important legal disclaimer — Encryption<br><br>
+
+This feature can produce encrypted or otherwise obscured audio transmissions. Laws and license conditions differ by jurisdiction and radio service. In many places, amateur/ham operators are not permitted to transmit messages encoded to obscure their meaning, with limited exceptions defined by the regulator. Other services (e.g., certain business/public‑safety services under specific rules) may allow encryption, often with strict conditions.<br><br>
+
+Use this feature only where you are expressly authorized, on frequencies, power levels, and services that permit encryption, and only in compliance with your license and local regulations.<br><br>
+
+You are solely responsible for all transmissions you make, including key management, content, and compliance with spectrum allocations and interference rules.<br><br>
+
+This software is provided for lawful, educational and testing purposes and is offered “as is” without warranties of any kind. The authors and distributors disclaim all liability for misuse, non‑compliant operation, or resulting penalties.<br><br>
+
+Nothing in this notice is legal advice. For definitive guidance, consult a qualified attorney and/or your national regulator before transmitting.<br><br>
+
+By enabling encryption you acknowledge these terms and accept full responsibility for your use.<br><br>
+      </label>
+    </div>
+
+
+
+          <div><label><input type="checkbox" id="useAesGcm"> Use AES-256-GCM</label></div>
+
+          <div>
+            <label>PSK:
+              <input id="psk" type="password" placeholder="Enter pre-shared key" autocomplete="new-password">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="chat.js"></script>
+  <script>
+    const dz = document.getElementById('dangerZone');
+    const dzFields = document.getElementById('dangerZoneFields');
+    if (dz && dzFields) {
+      dz.addEventListener('change', () => {
+        dz.setAttribute('aria-expanded', dz.checked ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('#messages .row').forEach(row => {
+      row.querySelector('.ts').textContent = row.dataset.ts;
+      row.querySelector('.nick').textContent = `<${row.dataset.nick}>`;
+    });
+  </script>
+</body>
+</html>

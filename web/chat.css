@@ -1,0 +1,113 @@
+:root{
+  --bg: #0b0d10;
+  --bg-2: #121418;
+  --panel: #161a20;
+  --border: #2a2f36;
+  --fg: #d6d6d6;
+  --fg-dim: #9aa4b2;
+  --link: #6aa9ff;
+  --green: #8bc34a;
+  --blue: #67d4ff;
+  --yellow: #ffc857;
+  --nick-self: #67d4ff;
+  --nick-other: #8bc34a;
+  --nick-system: #9aa4b2;
+  --ts: #586273;
+}
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+#chat{
+  width: 720px;
+  max-width: 95vw;
+  margin: 24px auto;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#topicBar{
+  padding: 6px 10px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-dim);
+}
+#topicBar .chan { color: var(--yellow); }
+#topicBar .sep { color: #3b4654; padding: 0 6px; }
+#topicBar .net { color: #7aa2f7; }
+
+#messages{
+  height: 320px;
+  overflow-y: auto;
+  background: var(--bg);
+  padding: 6px 10px;
+}
+
+
+#messages .row{
+  display: grid;
+  grid-template-columns: 55px 120px minmax(0, 1fr);
+  column-gap: 8px;
+  margin: 1px 0;
+}
+
+#messages .text{
+  color: var(--fg);
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal; 
+}
+
+#messages .ts{ color: var(--ts); text-align: right; }
+#messages .nick{ white-space: nowrap; }
+
+
+#messages .me .nick { color: var(--nick-self); }
+#messages .them .nick { color: var(--nick-other); }
+#messages .system .nick { color: var(--nick-system); }
+#messages .system .text { color: var(--fg-dim); font-style: italic; }
+
+#inputBar{
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 6px;
+  padding: 8px;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+input, button{
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: inherit;
+}
+input:focus{ border-color: #3a89ff66; outline:none; }
+button{ cursor: pointer; background:#11161c; }
+button:hover{ background:#16202a; }
+
+#settingsPanel{
+  border-top: 1px solid var(--border);
+  padding: 10px;
+  background: var(--bg);
+}
+.hidden{ display:none; }
+#byteIndicator {
+  font-size: 12px;
+  color: #888;
+  margin: 4px 8px;
+}
+#byteIndicator.over {
+  color: red;
+  font-weight: bold;
+}
